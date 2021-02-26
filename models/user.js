@@ -2,10 +2,10 @@ const pool = require('../modules/pool');
 const table = 'user';
 
 const user = {
-    signup: async (userId, username, password, salt, email) => {
-        const fields = 'userId, username, password, salt, email';
+    signup: async (id, name, password, salt, email) => {
+        const fields = 'id, name, password, salt, email';
         const questions = `?, ?, ?, ?, ?`;
-        const values = [userId, username, password, salt, email];
+        const values = [id, name, password, salt, email];
         const query = `INSERT INTO ${table}(${fields}) VALUES(${questions})`;
         try {
             const result = await pool.queryParamArr(query, values);
@@ -29,14 +29,26 @@ const user = {
             } else return true;
         } catch (err) {
             if (err.errno == 1062) {
-                console.log('checkUser ERROR : ', err.errno, err.code);
+                console.log('signup ERROR : ', err.errno, err.code);
                 return -1;
             }
-            console.log('checkUser ERROR : ', err);
+            console.log('signup ERROR : ', err);
             throw err;
         }
     },
-    signin: async (id, password) => {},
+    getUserById : async (id) => {
+        const query = `SELECT * FROM ${table} WHERE id=?`;
+        try {
+            return await pool.queryParamArr(query, [id]);
+        } catch (err) {
+            if (err.errno == 1062) {
+                console.log('signup ERROR : ', err.errno, err.code);
+                return -1;
+            }
+            console.log('signup ERROR : ', err);
+            throw err;
+        }
+    }
 }
 
 module.exports = user;
