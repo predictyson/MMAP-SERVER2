@@ -37,9 +37,9 @@ const user = {
         }
     },
     getUserById : async (id) => {
-        const query = `SELECT * FROM ${table} WHERE id=?`;
+        const query = `SELECT * FROM ${table} WHERE userIdx="${id}"`;
         try {
-            return await pool.queryParamArr(query, [id]);
+            return await pool.queryParamArr(query);
         } catch (err) {
             if (err.errno == 1062) {
                 console.log('signup ERROR : ', err.errno, err.code);
@@ -48,7 +48,17 @@ const user = {
             console.log('signup ERROR : ', err);
             throw err;
         }
-    }
+    },
+    findByUserId: async (id) => {
+        const query = `SELECT * FROM ${table} WHERE id="${id}"`;
+        try {
+            const result = await pool.queryParam(query);
+            return result;
+        } catch (err) {
+            console.log('checkUser ERROR : ', err);
+            throw err;
+        }
+    },
 }
 
 module.exports = user;
