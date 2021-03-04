@@ -1,9 +1,9 @@
 const pool = require('../modules/pool');
-const table = 'list';
+const table = 'marker';
 
 const list = {
-    getPosts: async(userIdx) => {
-        const query = `SELECT list.city, list.country, list.text, list.user_userIdx FROM ${table} JOIN user ON user.userIdx = ${table}.user_userIdx WHERE user_userIdx = "${userIdx}"`;
+    getRecords: async(userIdx) => {
+        const query = `SELECT marker.city, marker.country, marker.text, marker.user_userIdx FROM ${table} JOIN user ON user.userIdx = ${table}.user_userIdx WHERE user_userIdx = "${userIdx}"`;
         try {
             const result = await pool.queryParamArr(query);
             return result;

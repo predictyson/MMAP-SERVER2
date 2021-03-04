@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const listController = require('../controllers/listController');
+const recordController = require('../controllers/recordController');
 const middleware = require('../modules/middlewares');
 
-router.get('/:userIdx', listController.getRecords);
+router.post('/', middleware.userJwt, recordController.addRecords);
 
 module.exports = router; 

@@ -1,7 +1,5 @@
 const pool = require('../modules/pool');
-const mapTable = 'map';
-const listTable = 'list';
-const userTable = 'user';
+const table = 'marker';
 
 const map = {
     addPost: async (city, country, text, userIdx) => {
@@ -25,7 +23,7 @@ const map = {
     // map 테이블 마커 가져오기 userIdx 가져오면 markerIdx, lat, long
     // from map inner join user on map.userIdx = 30;
     getMarkers : async (userIdx) => {
-        const query = `SELECT map.markerIdx, map.lattitude, map.longtitude FROM ${mapTable} LEFT JOIN ${userTable} ON user.userIdx = map.userIdx WHERE map.userIdx = "${userIdx}"`;
+        const query = `SELECT marker.markerIdx, marker.lattitude, marker.longtitude FROM ${table} LEFT JOIN user ON user.userIdx = marker.user_userIdx WHERE marker.user_userIdx = "${userIdx}"`;
         try{
             const result = await pool.queryParamArr(query);
             return result;
