@@ -16,6 +16,12 @@ module.exports = {
     
     // 프로필 조회
     READ_PROFILE_SUCCESS: "프로필 조회 성공",
+    DB_ERROR: "DB 오류",
 
-    DB_ERROR: "DB 오류"
+    //map
+    GET_MARKERS_SUCCESS: "지도 마커 불러오기 성공",
+    EMPTY_TOKEN: "필요한 토큰이 없습니다.",
+
+    //list
+    GET_POSTS_SUCCESS: "전체 정보 불러오기 성공",
 };

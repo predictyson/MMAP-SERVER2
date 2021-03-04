@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
-const util = require('../modules/util');
-const statusCode = require('../modules/statusCode');
-const resMessage = require('../modules/responseMessage');
+const mapController = require('../controllers/mapController');
+const middleware = require('../modules/middlewares');
+// const upload = require('../modules/multer');
 
-router.get('/marker', async (req, res) => {
-    const id = req.param.id;
-    
-})
+//router.get('/:userIdx',mapController.getMarkers);
+router.post('/post', middleware.userJwt, mapController.addPost);
+router.get('/:userIdx', mapController.getMarkers);
 
-module.exports = router;
+module.exports = router; 
