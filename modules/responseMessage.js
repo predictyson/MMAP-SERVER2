@@ -20,7 +20,9 @@ module.exports = {
 
     //map
     GET_MARKERS_SUCCESS: "지도 마커 불러오기 성공",
-    EMPTY_TOKEN: "필요한 토큰이 없습니다.",
+    EMPTY_TOKEN: "필요한 토큰이 없습니다",
+    UNSUPPORTED_TYPE: "지원되지 않는 이미지 형식입니다",
+    NULL_IMAGE: '이미지가 없습니다.',
 
     //list
     GET_POSTS_SUCCESS: "전체 정보 불러오기 성공",
