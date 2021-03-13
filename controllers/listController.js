@@ -8,6 +8,7 @@ const List = require('../models/list');
 module.exports = {
     getRecords: async(req, res) => {
         const userIdx = req.params.userIdx;
+
         if( !userIdx ) {
             res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
             return;
