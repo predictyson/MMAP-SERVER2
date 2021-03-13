@@ -23,7 +23,7 @@ const map = {
     // map 테이블 마커 가져오기 userIdx 가져오면 markerIdx, lat, long
     // from map inner join user on map.userIdx = 30;
     getMarkers : async (userIdx) => {
-        const query = `SELECT marker.markerIdx, marker.lattitude, marker.longtitude FROM ${table} LEFT JOIN user ON user.userIdx = marker.user_userIdx WHERE marker.user_userIdx = "${userIdx}"`;
+        const query = `SELECT marker.markerIdx, marker.lattitude, marker.longtitude, marker.city, marker.country, marker.date FROM ${table} LEFT JOIN user ON user.userIdx = marker.user_userIdx WHERE marker.user_userIdx = "${userIdx}"`;
         try{
             const result = await pool.queryParamArr(query);
             return result;
