@@ -2,10 +2,10 @@ const pool = require('../modules/pool');
 const table = 'marker';
 
 const record = {
-    addRecord: async( city, country, text, lattitude, longtitude, userIdx, img) => {
-        const fields = `city, country, text, lattitude, longtitude, user_userIdx, img`;
-        const questions = `?,?,?,?,?,?,?`;
-        const values = [city, country, text, lattitude, longtitude, userIdx, img];
+    addRecord: async( city, country, text, lattitude, longtitude, userIdx, img, date) => {
+        const fields = `city, country, text, lattitude, longtitude, user_userIdx, img, date`;
+        const questions = `?,?,?,?,?,?,?,?`;
+        const values = [city, country, text, lattitude, longtitude, userIdx, img, date];
         const query =  `INSERT INTO ${table} (${fields}) VALUES (${questions})`;
         try {
             const result = await pool.queryParamArr(query, values);

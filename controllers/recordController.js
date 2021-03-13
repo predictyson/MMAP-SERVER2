@@ -31,15 +31,16 @@ module.exports = {
             text,
             lattitude, 
             longtitude,
+            date
         } = req.body;
 
-        if( !city || !country || !text || !lattitude || !longtitude ){
+        if( !city || !country || !text || !lattitude || !longtitude || !date ){
             res.status(statusCode.BAD_REQUEST)
                 .send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
             return;
         }
 
-        const pIdx = await Record.addRecord(city, country, text, lattitude, longtitude, userIdx, img);
+        const pIdx = await Record.addRecord(city, country, text, lattitude, longtitude, userIdx, img, date);
         
         res.status(statusCode.OK)
             .send(util.success(statusCode.OK, resMessage.ADD_POST_SUCCESS,{
