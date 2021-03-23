@@ -26,4 +26,6 @@ module.exports = {
 
     //list
     GET_POSTS_SUCCESS: "전체 정보 불러오기 성공",
+    UPDATE_LIST_SUCCESS: "리스트 업데이트 성공",
+    DELETE_LIST_SUCCESS: "리스트 삭제 성공"
 };

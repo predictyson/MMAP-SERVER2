@@ -4,6 +4,6 @@ const recordController = require('../controllers/recordController');
 const middleware = require('../modules/middlewares');
 const upload = require('../modules/multer');
 
-router.post('/', middleware.userJwt, upload.single('img'),recordController.addRecords);
+router.post('/', middleware.userJwt, upload.single('postImg'),recordController.addRecords);
 
 module.exports = router; 

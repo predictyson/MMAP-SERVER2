@@ -8,22 +8,11 @@ const Record = require('../models/record');
 module.exports = {
     addRecords: async(req, res) => {
         const userIdx = req.userIdx;
-        const img = req.file.location;
-        //data check (undefined)
-        if (img === undefined ) {
-            return res.status(statusCode.OK).send(util.success(statusCode.BAD_REQUEST, resMessage.NULL_IMAGE));
-        }
-        //image type check
-        const type  = req.file.mimetype.split('/')[1];
-        if (type !== 'jpeg' && type !== 'jpg' && type !== 'png') {
-            return res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.UNSUPPORTED_TYPE));
-        }
-        if(!userIdx) {
+        if (!userIdx) {
             res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.EMPTY_TOKEN));
             return;
         }
-        //img here
-        //const postImg = req.file.location;
+        const postImg = req.file.location;
 
         const {
             city,
@@ -31,20 +20,39 @@ module.exports = {
             text,
             lattitude, 
             longtitude,
-            date
+            date,
+            location,
         } = req.body;
 
-        if( !city || !country || !text || !lattitude || !longtitude || !date ){
+        //data check (undefined)
+        if (postImg === undefined ) {
+            return res.status(statusCode.OK).send(util.success(statusCode.BAD_REQUEST, resMessage.NULL_IMAGE));
+        }
+        //image type check
+        const type  = req.file.mimetype.split('/')[1];
+        if (type !== 'jpeg' && type !== 'jpg' && type !== 'png') {
+            return res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.UNSUPPORTED_TYPE));
+        }
+
+        if( !city || !country || !text || !lattitude || !longtitude || !date || !location){
             res.status(statusCode.BAD_REQUEST)
                 .send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
             return;
         }
 
-        const pIdx = await Record.addRecord(city, country, text, lattitude, longtitude, userIdx, img, date);
+        const pIdx = await Record.addRecords(postImg, city, country, text, lattitude, longtitude,userIdx, date,  location);
         
         res.status(statusCode.OK)
             .send(util.success(statusCode.OK, resMessage.ADD_POST_SUCCESS,{
-                postIdx: pIdx
+                postIdx: pIdx,
+                postImg: postImg,
+                city: city,
+                country: country,
+                text: text,
+                lattitude: lattitude,
+                longtitude: longtitude,
+                date: date,
+                location: location,
             }));
     }
 }
