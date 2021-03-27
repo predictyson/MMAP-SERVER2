@@ -8,7 +8,6 @@ const List = require('../models/list');
 module.exports = {
     getRecords: async(req, res) => {
         const userIdx = req.params.userIdx;
-
         if( !userIdx ) {
             res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
             return;
@@ -18,17 +17,33 @@ module.exports = {
         .send(util.success(statusCode.OK, resMessage.GET_RECORDS_SUCCESS, idx));
     },
     updateList: async(req, res) => {
-        const userIdx = req.params.userIdx;
-        if( !userIdx ) {
-            res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
+        const userIdx = req.userIdx;
+
+        if(!userIdx) {
+            res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.EMPTY_TOKEN));
             return;
         }
-        const idx = await List.updateList(userIdx);
-        return res.status(statusCode.OK)
-        .send(util.success(statusCode.OK, resMessage.UPDATE_LIST_SUCCESS, idx));
+        const markerIdx = req.params.markerIdx;
+        const postImg = req.file.location;
+
+        const {
+            city, 
+            country,
+            text,
+            date
+        } = req.body;
+
+        if (!markerIdx || postImg == undefined || !city || !country || !text || !date ) {
+            res.status(statusCode.BAD_REQUEST)
+            .send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));;
+            return;
+        }
+        const result = await List.updateList(markerIdx, postImg, city, country, text, date, userIdx);
+        res.status(statusCode.OK)
+        .send(util.success(statusCode.OK, resMessage.UPDATE_LIST_SUCCESS, result));
     },
     deleteList: async(req, res) => {
-        const userIdx = req.params.userIdx;
+        const userIdx = req.userIdx;
         if( !userIdx ) {
             res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
             return;
