@@ -33,7 +33,7 @@ module.exports = {
             date
         } = req.body;
 
-        if (!markerIdx || postImg == undefined || !city || !country || !text || !date ) {
+        if (!markerIdx || !city || !country || !text || !date ) {
             res.status(statusCode.BAD_REQUEST)
             .send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));;
             return;

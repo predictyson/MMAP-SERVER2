@@ -13,7 +13,7 @@ const list = {
         }
     },
     updateList: async(markerIdx, postImg, city, country, text, date, userIdx) => {
-        const fields = `postImg = ?, city = ?, country = ?, text = ?, date = ?, userIdx = ?`;
+        const fields = `postImg = ?, city = ?, country = ?, text = ?, date = ?, user_userIdx = ?`;
         const values = [postImg, city, country, text, date, userIdx];
         const query = `UPDATE ${table} SET ${fields} WHERE markerIdx = ${markerIdx}`;
         try{
