@@ -30,15 +30,18 @@ module.exports = {
             city, 
             country,
             text,
-            date
+            date,
+            lattitude,
+            longtitude,
+            location
         } = req.body;
 
-        if (!markerIdx || !city || !country || !text || !date ) {
+        if (!markerIdx || !city || !country || !text || !date || !lattitude || !longtitude || !location ) {
             res.status(statusCode.BAD_REQUEST)
             .send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));;
             return;
         }
-        const result = await List.updateList(markerIdx, postImg, city, country, text, date, userIdx);
+        const result = await List.updateList(markerIdx, postImg, city, country, text, date, lattitude, longtitude, location, userIdx);
         res.status(statusCode.OK)
         .send(util.success(statusCode.OK, resMessage.UPDATE_LIST_SUCCESS, result));
     },

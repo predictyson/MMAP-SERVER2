@@ -12,9 +12,9 @@ const list = {
             throw err;
         }
     },
-    updateList: async(markerIdx, postImg, city, country, text, date, userIdx) => {
-        const fields = `postImg = ?, city = ?, country = ?, text = ?, date = ?, user_userIdx = ?`;
-        const values = [postImg, city, country, text, date, userIdx];
+    updateList: async(markerIdx, postImg, city, country, text, date, lattitude, longtitude, location, userIdx) => {
+        const fields = `postImg = ?, city = ?, country = ?, text = ?, date = ?, lattitude = ?, longtitude = ?, location = ? , user_userIdx = ?`;
+        const values = [postImg, city, country, text, date, lattitude, longtitude, location, userIdx];
         const query = `UPDATE ${table} SET ${fields} WHERE markerIdx = ${markerIdx}`;
         try{
             const result = await pool.queryParamArr(query, values);
