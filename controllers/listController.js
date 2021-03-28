@@ -46,12 +46,18 @@ module.exports = {
         .send(util.success(statusCode.OK, resMessage.UPDATE_LIST_SUCCESS, result));
     },
     deleteList: async(req, res) => {
-        const userIdx = req.userIdx;
+      /*  const userIdx = req.userIdx;
         if( !userIdx ) {
             res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
             return;
+        }*/
+        const {markerIdx} = req.body;
+        if (!markerIdx) {
+            res.status(statusCode.BAD_REQUEST)
+            .send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
+            return;
         }
-        const idx = await List.deleteList(userIdx);
+        const idx = await List.deleteList(markerIdx);
         return res.status(statusCode.OK)
         .send(util.success(statusCode.OK, resMessage.DELETE_LIST_SUCCESS, idx));
     },
