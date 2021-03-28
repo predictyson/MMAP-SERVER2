@@ -3,7 +3,7 @@ const table = 'marker';
 
 const list = {
     getRecords: async(userIdx) => {
-        const query = `SELECT m.markerIdx, m.postImg, m.city, m.country, m.text, m.date, m.user_userIdx, u.name FROM ${table} AS m JOIN user AS u ON m.user_userIdx = u.userIdx WHERE m.user_userIdx = "${userIdx}"`;
+        const query = `SELECT m.markerIdx, m.postImg, m.city, m.country, m.text, m.date, m.user_userIdx, m.location, u.name FROM ${table} AS m JOIN user AS u ON m.user_userIdx = u.userIdx WHERE m.user_userIdx = "${userIdx}"`;
         try {
             const result = await pool.queryParamArr(query);
             return result;
