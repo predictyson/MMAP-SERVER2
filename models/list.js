@@ -38,7 +38,7 @@ const list = {
         const query  = `DELETE FROM ${table} WHERE markerIdx = "${markerIdx}"`;
         try{
             const result = await pool.queryParamArr(query);
-            return true;
+            return result;
         } catch (err) {
             console.log("DELETE LIST ERROR", err);
             throw err;

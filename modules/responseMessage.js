@@ -29,4 +29,7 @@ module.exports = {
     UPDATE_LIST_SUCCESS: "리스트 업데이트 성공",
     DELETE_LIST_SUCCESS: "리스트 삭제 성공",
     GET_NAME_SUCCESS: "이름 정보 불러오기 성공",
+
+    //setting
+    DELETE_USER_SUCCESS: "계정 삭제 성공",
 };
