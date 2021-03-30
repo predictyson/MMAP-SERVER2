@@ -3,7 +3,7 @@ const router = express.Router();
 const util = require('../modules/util');
 const statusCode = require('../modules/statusCode');
 const resMessage = require('../modules/responseMessage');
-const Setting = require('../models/Setting');
+const Setting = require('../models/setting');
 
 module.exports = {
     deleteUser: async(req, res) => {
